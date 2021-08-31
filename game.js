@@ -10,12 +10,18 @@ function nextSequence() {
   var randomChosenColour = buttonColours[randomNumber];
   gamePattern.push(randomChosenColour);
 
-}
+};
 
 
-document.querySelector("btn").addEventListener("click", function () {
+// $("#" + randomChosenColour).fadeOut(100).fadeIn(100).fadeIn(100);
+// var audio = new Audio("sounds/" + randomChosenColour + ".mp3");
+// audio.play();
 
-    $("#" + randomChosenColour).fadeOut(100).fadeIn(100).fadeIn(100);
-    var audio = new Audio("sounds/" + randomChosenColour + ".mp3");
-    audio.play();
+
+$( ".btn" ).click(function() {
+
+var userChosenColour = $(this).attr("id");
+alert(userChosenColour);
+
+
 });
