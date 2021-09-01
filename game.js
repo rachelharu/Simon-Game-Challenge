@@ -47,7 +47,13 @@ function checkAnswer(currentLevel){
 //  } else {
 //    console.log("poop");
 //  }
-return JSON.stringify(userClickedPattern)==JSON.stringify(gamePattern);
+if (JSON.stringify(userClickedPattern)==JSON.stringify(gamePattern)){
+  console.log("success");
+} else {
+  console.log("wrong");
+}
+
+//return JSON.stringify(userClickedPattern)==JSON.stringify(gamePattern);
 }
 
 
