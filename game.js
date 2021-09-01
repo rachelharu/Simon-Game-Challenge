@@ -42,8 +42,16 @@ if (userClickedPattern.length === gamePattern.length) {
 }
   } else {
     console.log("wrong");
-    var wrongAudio = new Audio("sounds/wrong.mp3");
-    wrongAudio.play();
+
+    playSound("wrong");
+
+    $("body").addClass("game-over");
+    setTimeout(function(){
+      $("body").removeClass("game-over");
+    },200);
+
+    $("#level-title").text("Game Over, Press Any Key to Restart");
+    startOver();
   }
 }
 
@@ -56,9 +64,14 @@ function nextSequence() {
   var randomChosenColour = buttonColours[randomNumber];
   gamePattern.push(randomChosenColour);
 
-  //animations and sounds
   $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
   playSound(randomChosenColour);
+}
+
+function startOver(){
+  level = 0;
+  gamePattern = [];
+  started = false;
 }
 
 // function for sounds
