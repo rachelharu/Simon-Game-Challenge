@@ -8,15 +8,48 @@ var started = false;
 //starts game
 $(document).keypress(function() {
   if (!started) {
-    level++;
     $("#level-title").text("level " + level);
     nextSequence();
     started = true;
   }
 });
 
+
+
+//checks users click and sends lights and animations to corresponding button
+$(".btn").click(function() {
+  var userChosenColour = $(this).attr("id");
+  //alert(userChosenColour);
+  userClickedPattern.push(userChosenColour);
+  // console.log(userClickedPattern);
+  playSound(userChosenColour);
+  animatePress(userChosenColour);
+  //calls check answer after click then gets the index of last input
+  checkAnswer(userClickedPattern.length - 1);
+});
+
+//function to check user answers
+function checkAnswer(currentLevel) {
+
+if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
+
+console.log("success");
+
+if (userClickedPattern.length === gamePattern.length) {
+    setTimeout(function() {
+      nextSequence();
+    }, 1000);
+}
+  } else {
+    console.log("wrong");
+    var wrongAudio = new Audio("sounds/wrong.mp3");
+    wrongAudio.play();
+  }
+}
+
 //starts sequence
 function nextSequence() {
+  userClickedPattern = [];
   level++;
   $("#level-title").text("level " + level);
   var randomNumber = Math.floor(Math.random() * 4);
@@ -27,35 +60,6 @@ function nextSequence() {
   $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
   playSound(randomChosenColour);
 }
-
-//checks users click and sends lights and animations to corresponding button
-$(".btn").click(function() {
-  var userChosenColour = $(this).attr("id");
-  //alert(userChosenColour);
-  userClickedPattern.push(userChosenColour);
-  // console.log(userClickedPattern);
-  playSound(userChosenColour);
-  animatePress(userChosenColour);
-
-});
-
-//function to check user answers
-function checkAnswer(currentLevel){
-// if (userClickedPattern == gamePattern)
-//  {
-//    console.log("yes");
-//  } else {
-//    console.log("poop");
-//  }
-if (JSON.stringify(userClickedPattern)==JSON.stringify(gamePattern)){
-  console.log("success");
-} else {
-  console.log("wrong");
-}
-
-//return JSON.stringify(userClickedPattern)==JSON.stringify(gamePattern);
-}
-
 
 // function for sounds
 function playSound(name) {
