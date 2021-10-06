@@ -10,3 +10,5 @@ test students knowledge on javascript
 
 #credits
 HTML/CSS/Design - the app brewery
+
+LIVE PREVIEW[https://simon-game-challenge-ten.vercel.app/]
